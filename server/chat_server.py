@@ -43,7 +43,7 @@ def create_app() -> FastAPI:
                 "client": None,
                 "host": "",
                 "port": 6333,
-                "path": "/Users/zouwuhe/Desktop/src/mem_minus/wks/qdrant",
+                "path": "./wks/qdrant",
                 "url": "https://d8a17329-41df-49fc-811f-c5e762a2b12e.europe-west3-0.gcp.cloud.qdrant.io:6333",
                 "api_key": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2Nlc3MiOiJtIn0.zyODVTAKCSNpo0cBBh6yXMlf29A8nJAaz42KTTZP2hk",
                 "on_disk": False
@@ -65,7 +65,7 @@ def create_app() -> FastAPI:
             "config": {
                 "model": "doubao-embedding-text-240715",
                 "api_key": "8b2dce0f-ed36-4d2b-898a-14845cc496c1",
-                "openai_base_url": "ark",
+                "openai_base_url": "https://ark.cn-beijing.volces.com/api/v3",
                 "embedding_dims": 2560
             }
         },
@@ -78,6 +78,11 @@ def create_app() -> FastAPI:
     
     # 模型配置
     model_configs = {
+        "glm-4-flash": {
+            "api_key": "0031af15104f4a49bb70e1e6bf1e4d72.nybmwLU1gf7U41fh",
+            "model": "glm-4-flash",
+            "openai_base_url": "https://open.bigmodel.cn/api/paas/v4/"
+        },
         "doubao-character": {
             "api_key": "8b2dce0f-ed36-4d2b-898a-14845cc496c1",
             "model": "doubao-1-5-pro-32k-character-250715",
@@ -99,7 +104,7 @@ def create_app() -> FastAPI:
     class ChatRequest(BaseModel):
         user_id: str = Field(..., description="User ID")
         message: str = Field(..., description="User's message")
-        model: str = Field(default="doubao-character", description="Model to use")
+        model: str = Field(default="glm-4-flash", description="Model to use")
         persona: Optional[str] = Field(default="", description="Bot persona")
         frequency: int = Field(default=1, description="Memory extraction frequency")
         summary_frequency: int = Field(default=10, description="Summary frequency")
